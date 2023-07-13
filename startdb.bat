@@ -4,10 +4,6 @@ docker-compose --file docker-compose-replicaset.yml --project-name bd-mongodb up
 
 timeout /t 25 >nul
 
-docker-compose --file docker-compose-api.yml --project-name API up -d
-
-timeout /t 25 >nul
-
 docker-compose --file docker-compose-replicaset_db2.yml --project-name bd-mongodb2 up -d
 
 timeout /t 25 >nul

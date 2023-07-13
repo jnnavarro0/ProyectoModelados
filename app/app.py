@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 from pymongo.errors import ConnectionFailure
 import time
 import secrets
-
+import subprocess
 
 app = Flask(__name__)
 
@@ -138,6 +138,12 @@ def update_data():
     
     except Exception as e:
         return str(e)
+    
+    
+@app.route('/run_script', methods=['POST'])
+def run_script():
+    subprocess.run(['python', '../api.py'])
+    return 'Script ejecutado'
 
 
 
