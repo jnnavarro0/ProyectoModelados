@@ -1,0 +1,84 @@
+version: '3.9'
+
+services:
+  mongodb2-nodo1:
+    container_name: mongodb2-nodo1
+    image: mongo
+    volumes:
+      - ./mongors2/data1:/data/db
+      - ./rs-init-bd2.js:/scripts/rs-init-bd2.js
+      - ./init-bd2.js:/scripts/init-bd2.js
+    networks:
+      - mongors-networkbd2
+    cpus: "0.5"
+    mem_limit: 450m
+    ports:
+      - 27025:27017
+    restart: always
+    command: mongod --bind_ip_all --replSet "dbetl"
+    depends_on:
+      - mongodb2-nodo3
+      - mongodb2-nodo2
+    links:
+      - mongodb2-nodo3
+      - mongodb2-nodo2
+
+  mongodb2-nodo2:
+    container_name: mongodb2-nodo2
+    image: mongo
+    volumes:
+      - ./mongors2/data2:/data/db
+    networks:
+      - mongors-networkbd2
+    cpus: "0.5"
+    mem_limit: 450m
+    ports:
+      - 27027:27017
+    restart: always
+    command: mongod --bind_ip_all --replSet "dbetl"
+
+  mongodb2-nodo3:
+    container_name: mongodb2-nodo3
+    image: mongo
+    volumes:
+      - ./mongors2/data3:/data/db
+    networks:
+      - mongors-networkbd2
+    cpus: "0.5"
+    mem_limit: 450m
+    ports:
+      - 27026:27017
+    restart: always
+    command: mongod --bind_ip_all --replSet "dbetl"
+
+
+  web2:
+    container_name: app2
+    hostname: app2
+    build: 
+      context: ./app2
+      dockerfile: Dockerfile
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_APP: ./app2.py
+      FLASK_RUN_HOST: 0.0.0.0
+      TEMPLATES_AUTO_RELOAD: 'True'
+      FLASK_ENV: development
+    ports: 
+      - '5000:5000'
+    volumes:
+      - ./app2:/app
+    networks:
+      - mongors-networkbd2
+    depends_on:
+      - mongodb2-nodo1
+      - mongodb2-nodo2
+      - mongodb2-nodo3
+
+networks:
+  mongors-networkbd2:
+    driver: bridge

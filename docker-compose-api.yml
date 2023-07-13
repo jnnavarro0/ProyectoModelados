@@ -1,0 +1,22 @@
+version: '3'
+services:
+  api:
+    container_name: api
+    hostname: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    entrypoint:
+      - flask
+      - run
+      - --host=0.0.0.0
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_APP: ./api/api.py
+      FLASK_RUN_HOST: 0.0.0.0
+      TEMPLATES_AUTO_RELOAD: 'True'
+      FLASK_ENV: development
+    ports: 
+      - '8001:5000'
+    volumes:
+      - ./api:/api
