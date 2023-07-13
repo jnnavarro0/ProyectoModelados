@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+<title>Visor de Datos</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -306,10 +306,6 @@ $(document).ready(function() {
 					</div>
 					<div class="col-sm-6">
 						
-							<div class="container-xl">
-								<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-								<button type="submit" class="btn btn-danger"><i class="material-icons">&#xE872;</i> <span>Delete Selected</span></button>
-							</div>
 						
 					</div>
 				</div>
@@ -318,10 +314,7 @@ $(document).ready(function() {
 				<thead>
 					<tr>
 						<th>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="selectAll">
-								<label for="selectAll"></label>
-							</span>
+							
 						</th>
 						<th>ID</th>
 						<th>Vendedor</th>
@@ -338,10 +331,7 @@ $(document).ready(function() {
 				<tbody>
 				<tr>
 						<td>
-							<span class="custom-checkbox">
-								<input type="checkbox" id="checkbox1" name="options[]" value="{{ item['_id'] }}">
-								<label for="checkbox1"></label>
-							</span>
+							
 						</td>
 					<td>{{ item['id'] }}</td>
 					<td>{{ item.Salesperson }}</td>
@@ -352,24 +342,13 @@ $(document).ready(function() {
 					<td>{{ item['Sale Price'] }}</td>
 					<td>{{ item['Commission Rate'] }}</td>
 					<td>{{ item['Commission Earned'] }}</td>
-					<td>
-						<a href="#editEmployeeModal" class="edit" data-toggle="modal" data-id="{{ item['_id'] }}" data-salesperson="{{ item['Salesperson'] }}" data-customer="{{ item['Customer Name'] }}" data-make="{{ item['Car Make'] }}" data-model="{{ item['Car Model'] }}" data-year="{{ item['Car Year'] }}" data-price="{{ item['Sale Price'] }}" data-rate="{{ item['Commission Rate'] }}" data-earned="{{ item['Commission Earned'] }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-					</td>
+					
 				</tr>
 				{% endfor %}
 			</table>
 		</form>
 			<div class="clearfix">
-				<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-				<ul class="pagination">
-					<li class="page-item disabled"><a href="#">Previous</a></li>
-					<li class="page-item"><a href="#" class="page-link">1</a></li>
-					<li class="page-item"><a href="#" class="page-link">2</a></li>
-					<li class="page-item active"><a href="#" class="page-link">3</a></li>
-					<li class="page-item"><a href="#" class="page-link">4</a></li>
-					<li class="page-item"><a href="#" class="page-link">5</a></li>
-					<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
+				
 			</div>
 		</div>
 	</div>        
